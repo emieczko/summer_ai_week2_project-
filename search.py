@@ -106,7 +106,7 @@ def depthFirstSearch(problem: SearchProblem):
         
         for child, move, newCost in problem.getSuccessors(currentNode):
             if not child in visited:
-                Stack.push((child, path + [move], cost))
+                Stack.push((child, path + [move], newCost))
 
     #util.raiseNotDefined()
 
@@ -131,9 +131,9 @@ def breadthFirstSearch(problem: SearchProblem):
         else:
             visited.append(currentNode)
         
-        for child, move, cost in problem.getSuccessors(currentNode):
+        for child, move, newCost in problem.getSuccessors(currentNode):
             if not child in visited:
-                Queue.push((child, path + [move], cost))
+                Queue.push((child, path + [move], newCost))
 
     #util.raiseNotDefined()
 
