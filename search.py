@@ -17,6 +17,7 @@ In search.py, you will implement generic search algorithms which are called by
 Pacman agents (in searchAgents.py).
 """
 
+from tracemalloc import start
 import util
 
 class SearchProblem:
@@ -82,16 +83,59 @@ def depthFirstSearch(problem: SearchProblem):
     To get started, you might want to try some of these simple commands to
     understand the search problem that is being passed in:
     """
-    print("Start:", problem.getStartState())
-    print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
-    print("Start's successors:", problem.getSuccessors(problem.getStartState()))
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    #print("Start:", problem.getStartState())
+    #print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
+    #print("Start's successors:", problem.getSuccessors(problem.getStartState()))
+    startState = problem.getStartState()
+
+    visited = []
+    Stack = util.Stack()
+
+    Stack.push((startState, [], 0))
+    goalFound = False
+
+    while goalFound == False:
+        currentNode = problem.getSuccessors(startState)
+        currentNode, path, cost = Stack.pop()
+
+        if problem.isGoalState(currentNode):
+            goalFound = True
+            return path
+        else:
+            visited.append(currentNode)
+        
+        for child, move, newCost in problem.getSuccessors(currentNode):
+            if not child in visited:
+                Stack.push((child, path + [move], cost))
+
+    #util.raiseNotDefined()
 
 def breadthFirstSearch(problem: SearchProblem):
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    startState = problem.getStartState()
+
+    visited = []
+    Queue = util.Queue()
+
+    Queue.push((startState, [], 0))
+    goalFound = False
+
+    while goalFound == False:
+        currentNode = problem.getSuccessors(startState)
+        currentNode, path, cost = Queue.pop()
+
+        if problem.isGoalState(currentNode):
+            goalFound = True
+            return path
+        else:
+            visited.append(currentNode)
+        
+        for child, move, cost in problem.getSuccessors(currentNode):
+            if not child in visited:
+                Queue.push((child, path + [move], cost))
+
+    #util.raiseNotDefined()
 
 def uniformCostSearch(problem: SearchProblem):
     """Search the node of least total cost first."""
