@@ -1,0 +1,3 @@
+I'm not sure what to think of this project. On one hand, it appeared easy and I didn't have an overwhelming amount
+of trouble copying the pseudocode. However, the autograder marks my code as incorrect, so I'm not sure if that's a fault
+from the autograder or me. Generally, however, I'd say it certainly wasn't an easy project, but also not impossible. 
